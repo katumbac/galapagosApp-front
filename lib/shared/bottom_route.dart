@@ -1,6 +1,6 @@
-import 'package:exploregalapagos/current%20_location.dart';
+import 'package:exploregalapagos/comentarios.dart';
 import 'package:exploregalapagos/home.dart';
-
+import 'package:exploregalapagos/sign_in_up.dart';
 import 'package:flutter/material.dart';
 
 class BottomRoute extends StatelessWidget {
@@ -11,7 +11,8 @@ class BottomRoute extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> screens = [
       const HomeScreen(),
-      const CurrentLocationScreen(),
+      const ComentariosScreen(),
+      const SignInUp(),
     ];
     return screens[index];
   }

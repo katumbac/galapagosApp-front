@@ -1,3 +1,4 @@
+import 'package:exploregalapagos/sign_in_up.dart';
 import 'package:flutter/material.dart';
 import 'package:exploregalapagos/shared/constants.dart';
 
@@ -22,14 +23,22 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
       currentIndex: widget.selected,
       onTap: (index) {
         setState(() {
-          widget.selected = index;
-          widget.currentIndex(index);
+          if (index == 2) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const SignInUp()),
+            );
+          } else {
+            widget.selected = index;
+            widget.currentIndex(index);
+          }
+          
         });
       },
       type: BottomNavigationBarType.fixed,
       enableFeedback: false,
       selectedItemColor: const Color.fromARGB(255, 10, 5, 59),
-      unselectedItemColor: Colors.black,
+      unselectedItemColor: Colors.grey,
       iconSize: 33,
       items: [
         BottomNavigationBarItem(
@@ -38,9 +47,14 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
           label: 'Inicio',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.share_location_outlined, color: colordesactivate),
-          activeIcon: Icon(Icons.share_location_outlined, color: coloractivate),
-          label: 'Ubicación',
+          icon: Icon(Icons.message_outlined, color: colordesactivate),
+          activeIcon: Icon(Icons.message_outlined, color: coloractivate),
+          label: 'Comentarios',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.logout, color: colordesactivate),
+          activeIcon: Icon(Icons.logout, color: coloractivate),
+          label: 'Cerrar Sesión',
         ),
       ],
     );

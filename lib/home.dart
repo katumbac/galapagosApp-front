@@ -2,7 +2,7 @@ import 'package:exploregalapagos/Screens/Actividades/actividades.dart';
 import 'package:exploregalapagos/Screens/Ecosistemas/ecosistemas.dart';
 import 'package:exploregalapagos/Screens/Guias/guias.dart';
 import 'package:exploregalapagos/Screens/Negocios/negocios.dart';
-import 'package:exploregalapagos/Screens/Practicas/practicas.dart';
+import 'package:exploregalapagos/Screens/Islas/islas.dart';
 import 'package:exploregalapagos/front_page.dart';
 import 'package:exploregalapagos/Screens/Biodiversidad/biodiversidad.dart';
 import 'package:exploregalapagos/shared/constants.dart';
@@ -68,10 +68,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     defaultIconTextColor: defaultIconTextColor,
                   ),
                   GridItem(
-                    icon: Icons.grass_outlined,
-                    title: 'Ecosistemas Sensibles',
-                    index: 1,
-                    nextPage: const EcosistemasSensiblesScreen(),
+                    icon: Icons.location_on_outlined,
+                    title: 'Las Islas Principales',
+                    index: 2,
+                    nextPage: const IslasScreen(),
                     selectedIndex: _selectedIndex,
                     onSelect: (int index) {
                       setState(() {
@@ -85,10 +85,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     defaultIconTextColor: defaultIconTextColor,
                   ),
                   GridItem(
-                    icon: Icons.gpp_good_outlined,
-                    title: 'Prácticas Responsables',
-                    index: 2,
-                    nextPage: const PracticasResponsablesScreen(),
+                    icon: Icons.grass_outlined,
+                    title: 'Ecosistemas Sensibles',
+                    index: 1,
+                    nextPage: const EcosistemasSensiblesScreen(),
                     selectedIndex: _selectedIndex,
                     onSelect: (int index) {
                       setState(() {

@@ -1,5 +1,6 @@
 import 'package:exploregalapagos/main_screen.dart';
 import 'package:exploregalapagos/shared/constants.dart';
+import 'package:exploregalapagos/sign_in_up.dart';
 import 'package:flutter/material.dart';
 
 class FrontPage extends StatefulWidget {
@@ -69,7 +70,7 @@ class _FrontPageState extends State<FrontPage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const MainScreen()));
+                            builder: (context) => const SignInUp()));
                   },
                   child: Text(
                     'INICIA LA AVENTURA',
