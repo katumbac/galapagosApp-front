@@ -2,21 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:exploregalapagos/shared/constants.dart';
 import 'package:exploregalapagos/widgets/data_font.dart';
 
-class NegocioCard extends StatelessWidget {
-  final int idNegocio;
-  final String nombreNegocio;
-  final String servicios;
-  final String horaInicio;
-  final String horaFin;
-  final String direccion;
+class FloraCard extends StatelessWidget {
+  final String nombreComun;
+  final String nombreCientifico;
+  final String datoCurioso;
+  final String distribucion;
+  final String usos;
   final String linkImagen;
 
-  const NegocioCard({super.key, required this.idNegocio, required this.nombreNegocio, required this.servicios, required this.horaInicio, 
-    required this.horaFin, required this.direccion, required this.linkImagen});
+  const FloraCard({super.key, required this.nombreComun, required this.nombreCientifico, required this.datoCurioso, required this.distribucion, 
+    required this.usos, required this.linkImagen});
 
   @override
   Widget build(BuildContext context) {
-    String horario = "$horaInicio - $horaFin";
     return Container(
         margin: const EdgeInsets.fromLTRB(50.0, 10.0, 50.0, 10.0),
         decoration: BoxDecoration(
@@ -32,7 +30,7 @@ class NegocioCard extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
                 image: const DecorationImage(
-                  image: NetworkImage('https://concepto.de/wp-content/uploads/2021/01/isla-e1610153657243.jpg'),
+                  image: NetworkImage('https://img.goraymi.com/2024/03/24/8804e164f11ed58e94ba07148727e2de_xl.jpg'),
                   // image: AssetImage('assets/imagen_local.jpg'), // Ruta de la imagen local
                   fit: BoxFit.cover,
                 ),
@@ -40,33 +38,27 @@ class NegocioCard extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Container(
-              width: 325,
+              width: 350,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  DataFont(dataTitulo: "Nombre: ", dataContenido: nombreNegocio),
+                  DataFont(dataTitulo: "Nombre común: ", dataContenido: nombreComun),
                   SizedBox(height: 9),
-                  DataFont(dataTitulo: "Opciones de servicio: ", dataContenido: servicios),
+                  DataFont(dataTitulo: "Nombre científico: ", dataContenido: nombreCientifico),
                   SizedBox(height: 9),
-                  DataFont(dataTitulo: "Horario: ", dataContenido: horario),
+                  DataFont(dataTitulo: "Distribución: ", dataContenido: distribucion),
                   SizedBox(height: 9),
-                  DataFont(dataTitulo: "Direccion: ", dataContenido: direccion),   
+                  DataFont(dataTitulo: "Usos: ", dataContenido: usos),
+                  SizedBox(height: 9),
+                  DataFont(dataTitulo: "Dato curioso: ", dataContenido: datoCurioso),      
                 ],
               )
             ),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                TextButton(
-                  onPressed: () {
-                    print('Botón presionado');
-                  },
-                  style: TextButton.styleFrom(
-                    foregroundColor: colorbuttonGreen,
-                  ),
-                  child: Text('Reseñas...'),
-                )
-              ]
+                SizedBox(height: 20)
+              ],
             )
           ],
         )

@@ -15,34 +15,55 @@ class NegociosScreen extends StatefulWidget {
 }
 
 class _NegociosScreenState extends State<NegociosScreen> {
+  List<Map> negocios = [
+    {'id': 1, 'nombreNegocio': 'negocio 1', 'servicios': 'comidas ricas', 'horaInicio': '6:30', 'horaFin': '21:00', 'direccion': 'direccion 1', 'linkImagen': 'linkImagen'},
+    {'id': 2, 'nombreNegocio': 'negocio 2', 'servicios': 'cocteles', 'horaInicio': '6:30', 'horaFin': '21:00', 'direccion': 'direccion 2', 'linkImagen': 'linkImagen'},
+    {'id': 3, 'nombreNegocio': 'negocio 3', 'servicios': 'cocteles', 'horaInicio': '6:30', 'horaFin': '21:00', 'direccion': 'direccion 2', 'linkImagen': 'linkImagen'},
+    {'id': 4, 'nombreNegocio': 'negocio 4', 'servicios': 'cocteles', 'horaInicio': '6:30', 'horaFin': '21:00', 'direccion': 'direccion 2', 'linkImagen': 'linkImagen'},
+    {'id': 5, 'nombreNegocio': 'negocio 5', 'servicios': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'horaInicio': '6:30', 'horaFin': '21:00', 'direccion': 'direccion 2', 'linkImagen': 'linkImagen'},
+  ];
+
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-          appBar: CustomAppBar(
+          appBar: const CustomAppBar(
             title: "Negocios",
             back: true,
           ),
           body: Column(
             children: [
               SizedBox(height: 15),
-              Card.outlined(
+              const Card.outlined(
                 margin: EdgeInsets.fromLTRB(50.0, 5.0, 50.0, 5.0),
                 child: ItemSelection(
                       title: "Seleccionar Isla",
-                      styles: ['TODO', 'ISABELA', 'SANTA CRUZ'],
+                      items: ['TODO', 'ISABELA', 'SANTA CRUZ'],
                   ),
               ),
               SizedBox(height: 15),
-              Card.outlined(
+              const Card.outlined(
                 margin: EdgeInsets.fromLTRB(50.0, 5.0, 50.0, 5.0),
                 child: ItemSelection(
                       title: "Seleccionar Tipo de Negocio",
-                      styles: ['TODO', 'Hotel', 'Restaurante', 'Tienda'],
+                      items: ['TODO', 'HOTEL', 'RESTAURANTE', 'TIENDA'],
                   ),
               ),
               SizedBox(height: 30),
-              NegocioCard(nombreNegocio: "Palm Beach", servicios: "Cocteles, comidas ricas", horaInicio: "6:30", horaFin: "21:00", direccion: "Av. Islas", linkImagen: "linkImagen")
-            ],
+              Expanded(
+                child: ListView.builder(
+                  itemCount: negocios.length,
+                  itemBuilder: (context, index) => NegocioCard(
+                    idNegocio: negocios[index]['id'],
+                    nombreNegocio: negocios[index]['nombreNegocio']!,
+                    servicios: negocios[index]['servicios']!,
+                    horaInicio: negocios[index]['horaInicio']!,
+                    horaFin: negocios[index]['horaFin']!,
+                    direccion: negocios[index]['direccion']!,
+                    linkImagen: negocios[index]['linkImagen']!,
+                  )
+                )
+              )   
+              ],
           )
         );
   }
