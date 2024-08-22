@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:exploregalapagos/shared/constants.dart';
 import 'package:exploregalapagos/shared/custom_app_bar.dart';
 import 'package:exploregalapagos/widgets/resenas_info_cards.dart';
+import 'package:exploregalapagos/Screens/Negocios/Resenas/registrar_resena.dart';
 
 class ResenasScreen extends StatefulWidget {
   final int idNegocio;
@@ -49,7 +50,10 @@ class _ResenasScreenState extends State<ResenasScreen> {
                 color: Color.fromARGB(255, 59, 66, 60),
                 iconSize: 55.0,
                 onPressed: () {
-                  print('Icono presionado');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                    builder: (context) =>  RegistrarResena(idNegocio: widget.idNegocio)));
                 },
               ),
               SizedBox(width: 25)
