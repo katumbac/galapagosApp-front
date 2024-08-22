@@ -32,6 +32,7 @@ class _BiodiversidadScreenState extends State<BiodiversidadScreen> {
               indicatorWeight: 3.0,
             ),
           ),
+          backgroundColor: Colors.white,
           body: TabBarView(
             children: [
               Column(

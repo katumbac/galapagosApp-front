@@ -22,6 +22,7 @@ class _ResenasScreenState extends State<ResenasScreen> {
         title: widget.nombreNegocio,
         back: true,
       ),
+      backgroundColor: Colors.white,
       body: Column(
         children: [
           SizedBox(height: 30),
@@ -31,8 +32,8 @@ class _ResenasScreenState extends State<ResenasScreen> {
               height: 200,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
-                image: const DecorationImage(
-                  image: NetworkImage('https://concepto.de/wp-content/uploads/2021/01/isla-e1610153657243.jpg'),
+                image: DecorationImage(
+                  image: NetworkImage(widget.linkImagen),
                   // image: AssetImage('assets/imagen_local.jpg'), // Ruta de la imagen local
                   fit: BoxFit.cover,
                 ),

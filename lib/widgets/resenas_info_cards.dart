@@ -10,11 +10,11 @@ class ResenasInfoCards extends StatefulWidget {
 
 class _ResenasInfoCardsState extends State<ResenasInfoCards> {
   List<Map<String,String>> resenas = [
-    {'nombre': 'rochardd', 'texto': 'comidas ricas', 'fecha': '2024-01-01', 'hora': '21:00'},
-    {'nombre': 'pepito', 'texto': 'cocteles', 'fecha': '2024-01-01', 'hora': '21:00'},
+    {'nombre': 'rochardd', 'texto': 'comidas ricas', 'fecha': '2024-01-01', 'hora': '17:00'},
+    {'nombre': 'pepito', 'texto': 'me gustan los cocteles', 'fecha': '2024-01-01', 'hora': '8:00'},
     {'nombre': 'lacobra', 'texto': 'BOEEEEEE', 'fecha': '2024-01-01', 'hora': '21:00'},
-    {'nombre': 'jes', 'texto': 'cocteles', 'fecha': '2024-01-01', 'hora': '21:00'},
-    {'nombre': 'asd', 'texto': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'fecha': '2024-01-01', 'hora': '21:00'},
+    {'nombre': 'davo', 'texto': 'mala atencion, no volvere nunca mas en mi vida :)', 'fecha': '2024-01-01', 'hora': '5:00'},
+    {'nombre': 'usuario1', 'texto': 'no se que poner', 'fecha': '2024-01-01', 'hora': '14:00'},
   ];
 
   @override

@@ -19,6 +19,7 @@ class _RegistrarResenaState extends State<RegistrarResena> {
         title: "Registrar Reseña",
         back: true,
       ),
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           children: [

@@ -13,12 +13,16 @@ class TextoCards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Card.outlined(
         margin: const EdgeInsets.fromLTRB(40.0, 10.0, 40.0, 10.0),
-        decoration: BoxDecoration(
-          border: Border.all(color: colorbuttonGreen, width: 3.0),
+        shape: RoundedRectangleBorder(
+          side: const BorderSide(
+            color: colorbuttonGreen,
+            width: 2.0,
+          ),
           borderRadius: BorderRadius.circular(10),
         ),
+        elevation: 10,
         child: Column(
           children: [
             SizedBox(height: 10),
@@ -52,7 +56,7 @@ class TextoCards extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Container(
-              width: 425,
+              width: 432,
               child: Text(texto, style: const TextStyle(fontSize: 15)),
             ),
             const Row(

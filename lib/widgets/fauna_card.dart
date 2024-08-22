@@ -15,12 +15,16 @@ class FaunaCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Card.outlined(
         margin: const EdgeInsets.fromLTRB(50.0, 10.0, 50.0, 10.0),
-        decoration: BoxDecoration(
-          border: Border.all(color: colorbuttonGreen, width: 3.0),
+        shape: RoundedRectangleBorder(
+          side: const BorderSide(
+            color: colorbuttonGreen,
+            width: 2.0,
+          ),
           borderRadius: BorderRadius.circular(10),
         ),
+        elevation: 15,
         child: Column(
           children: [
             SizedBox(height: 20),
@@ -29,8 +33,8 @@ class FaunaCard extends StatelessWidget {
               height: 200,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
-                image: const DecorationImage(
-                  image: NetworkImage('https://content.nationalgeographic.com.es/medio/2024/02/05/tortuga-gigante-galapagos_2a766ad7_240205124113_800x533.jpg'),
+                image: DecorationImage(
+                  image: NetworkImage(linkImagen),
                   // image: AssetImage('assets/imagen_local.jpg'), // Ruta de la imagen local
                   fit: BoxFit.cover,
                 ),
