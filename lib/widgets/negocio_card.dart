@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:exploregalapagos/shared/constants.dart';
 import 'package:exploregalapagos/widgets/data_font.dart';
+import 'package:exploregalapagos/Screens/Negocios/Resenas/resenas.dart';
 
 class NegocioCard extends StatelessWidget {
   final int idNegocio;
@@ -59,7 +60,10 @@ class NegocioCard extends StatelessWidget {
               children: [
                 TextButton(
                   onPressed: () {
-                    print('Botón presionado');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>  ResenasScreen(idNegocio: idNegocio, nombreNegocio: nombreNegocio, linkImagen: linkImagen)));
                   },
                   style: TextButton.styleFrom(
                     foregroundColor: colorbuttonGreen,
