@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:exploregalapagos/shared/constants.dart';
 import 'package:exploregalapagos/shared/custom_app_bar.dart';
-
+import 'package:exploregalapagos/widgets/fauna_card.dart';
+import 'package:exploregalapagos/widgets/fauna_info_cards.dart';
+import 'package:exploregalapagos/widgets/flora_card.dart';
+import 'package:exploregalapagos/widgets/flora_info_cards.dart';
 class BiodiversidadScreen extends StatefulWidget {
   const BiodiversidadScreen({super.key});
 
@@ -28,6 +31,23 @@ class _BiodiversidadScreenState extends State<BiodiversidadScreen> {
               indicatorColor: Color.fromARGB(255, 240, 204, 0),
               indicatorWeight: 3.0,
             ),
+          ),
+          backgroundColor: Colors.white,
+          body: TabBarView(
+            children: [
+              Column(
+                children:[
+                  SizedBox(height: 20),
+                  FaunaInfoCards()
+                ]
+              ),
+              Column(
+                children:[
+                  SizedBox(height: 20),
+                  FloraInfoCards()
+                ]
+              )
+            ]
           ),
         ));
   }
