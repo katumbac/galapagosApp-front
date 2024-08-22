@@ -49,7 +49,7 @@ class _FrontPageState extends State<FrontPage> {
                 ),
                 const SizedBox(height: 0.1),
                 Text(
-                  'EXPLOREGALÁPAGOS.',
+                  widget.title,
                   style: TextStyle(
                     fontSize: size.width * 0.05,
                     fontWeight: FontWeight.bold,

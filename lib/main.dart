@@ -1,5 +1,4 @@
 import 'package:exploregalapagos/front_page.dart';
-import 'package:exploregalapagos/sign_in_up.dart';
 import 'package:flutter/material.dart';
 
 void main() {
