@@ -55,9 +55,20 @@ class TextoCards extends StatelessWidget {
               ],
             ),
             SizedBox(height: 20),
-            Container(
-              width: 432,
-              child: Text(texto, style: const TextStyle(fontSize: 15)),
+            Container( 
+              margin: const EdgeInsets.fromLTRB(15.0, 0.0, 20.0, 0.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(texto, style: const TextStyle(fontSize: 15),),
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      SizedBox(height: 1)
+                    ],
+                  )
+                ]
+              )
             ),
             const Row(
               mainAxisAlignment: MainAxisAlignment.end,

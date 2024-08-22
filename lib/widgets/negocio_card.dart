@@ -45,7 +45,8 @@ class NegocioCard extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Container(
-              width: 325,
+              //width: 325,
+              margin: const EdgeInsets.fromLTRB(30.0, 0.0, 20.0, 0.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -55,7 +56,13 @@ class NegocioCard extends StatelessWidget {
                   SizedBox(height: 9),
                   DataFont(dataTitulo: "Horario: ", dataContenido: horario),
                   SizedBox(height: 9),
-                  DataFont(dataTitulo: "Direccion: ", dataContenido: direccion),   
+                  DataFont(dataTitulo: "Direccion: ", dataContenido: direccion),
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      SizedBox(height: 1)
+                    ],
+                  )   
                 ],
               )
             ),
