@@ -21,6 +21,8 @@ const List<Color> defaultGradient = [
 ];
 const List<Color> selectedGradient = defaultGradient;
 
+const Color gyellow = Color.fromARGB(255, 240, 204, 0);
+
 //List<Color> defaultGradientGreen = [Color.fromARGB(165, 27, 56, 28),  Color.fromARGB(165, 27, 56, 28),];
 
 
