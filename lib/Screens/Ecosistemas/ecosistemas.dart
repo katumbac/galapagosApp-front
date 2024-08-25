@@ -1,7 +1,6 @@
 import 'package:exploregalapagos/Screens/Ecosistemas/info_ecosistema.dart';
 import 'package:exploregalapagos/widgets/card_info_eco.dart';
 import 'package:flutter/material.dart';
-import 'package:exploregalapagos/shared/constants.dart';
 import 'package:exploregalapagos/shared/custom_app_bar.dart';
 
 class EcosistemasSensiblesScreen extends StatefulWidget {

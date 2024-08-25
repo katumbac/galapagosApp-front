@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:exploregalapagos/shared/constants.dart';
 import 'package:exploregalapagos/shared/custom_app_bar.dart';
 import 'package:exploregalapagos/widgets/card_info_isla.dart';
 import 'package:exploregalapagos/Screens/Islas/info_isla.dart';
