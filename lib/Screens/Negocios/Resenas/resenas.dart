@@ -41,7 +41,7 @@ class _ResenasScreenState extends State<ResenasScreen> {
             ),
           ),
           SizedBox(height: 30),
-          ResenasInfoCards(),
+          ResenasInfoCards(idNegocio: widget.idNegocio,),
           SizedBox(height: 7),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
