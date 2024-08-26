@@ -11,6 +11,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int index = 0;
+  int usuario = 1;
   CustomBottomNavigationBar? navBar;
   @override
   void initState() {
@@ -29,7 +30,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: navBar,
-      body: BottomRoute(index: index),
+      body: BottomRoute(index: index, usuario: usuario),
     );
   }
 }

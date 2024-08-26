@@ -9,12 +9,12 @@ class DataFont extends StatelessWidget {
   Widget build(BuildContext context) {
     return RichText(
       text:  TextSpan(
-        style: TextStyle(
+        style: const TextStyle(
           color: Colors.black,
           fontSize: 17.0
         ),
         children: <TextSpan>[
-          TextSpan(text: dataTitulo, style:  TextStyle(fontWeight: FontWeight.bold)),
+          TextSpan(text: dataTitulo, style:  const TextStyle(fontWeight: FontWeight.bold)),
           TextSpan(text: dataContenido)
         ]
       )

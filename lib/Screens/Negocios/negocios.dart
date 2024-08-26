@@ -1,8 +1,8 @@
 import 'package:exploregalapagos/models/negocio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:exploregalapagos/shared/constants.dart';
 import 'package:exploregalapagos/shared/custom_app_bar.dart';
+import 'package:exploregalapagos/shared/constants.dart';
 import 'package:exploregalapagos/widgets/item_selection.dart';
 import 'package:exploregalapagos/widgets/negocio_card.dart';
 import 'package:flutter/widgets.dart';
@@ -151,33 +151,31 @@ class _NegociosScreenState extends State<NegociosScreen> {
           backgroundColor: Colors.white,
           body: Column(
             children: [
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               Card.outlined(
                 margin: EdgeInsets.fromLTRB(50.0, 5.0, 50.0, 5.0),
+                color: Colors.white,
+                elevation: 2,
                 child: ItemSelection(
                       title: "Seleccionar Isla",
-                      //items: ['TODO', 'ISABELA', 'SANTA CRUZ'],
                       items: nombreIslas,
                       onSelected: (nuevaIsla) =>
                         actualizarFiltro(nuevaIsla, filtroTipoNegocio)
                   ),
-                color: Colors.white,
-                elevation: 2,
               ),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               Card.outlined(
                 margin: EdgeInsets.fromLTRB(50.0, 5.0, 50.0, 5.0),
+                color: Colors.white,
+                elevation: 2,
                 child: ItemSelection(
                       title: "Seleccionar Tipo de Negocio",
-                      //items: ['TODO', 'HOTEL', 'RESTAURANTE', 'TIENDA'],
                       items: nombreTiposNegocio,
                       onSelected: (nuevoTipoNegocio) =>
                         actualizarFiltro(filtroIsla, nuevoTipoNegocio),
                   ),
-                color: Colors.white,
-                elevation: 2,
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               Expanded(
                 child: ListView.builder(
                   itemCount: negociosFiltrados!.length,

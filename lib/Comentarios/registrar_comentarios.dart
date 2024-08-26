@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:exploregalapagos/shared/constants.dart';
 import 'package:exploregalapagos/shared/custom_app_bar.dart';
 
-class RegistrarResena extends StatefulWidget {
-  final int idNegocio;
-  const RegistrarResena({super.key, required this.idNegocio});
+class RegistrarComentario extends StatefulWidget {
+  final int usuario;
+  const RegistrarComentario({super.key, required this.usuario});
 
   @override
-  State<RegistrarResena> createState() =>_RegistrarResenaState();
+  State<RegistrarComentario> createState() =>_RegistrarComentarioState();
 }
 
-class _RegistrarResenaState extends State<RegistrarResena> {
+class _RegistrarComentarioState extends State<RegistrarComentario> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(
-        title: "Registrar Reseña",
+        title: "Registrar Comentario",
         back: true,
       ),
       backgroundColor: Colors.white,
@@ -29,7 +29,7 @@ class _RegistrarResenaState extends State<RegistrarResena> {
                 maxLength: 200,
                 maxLines: 17,
                 decoration: InputDecoration(
-                  hintText: 'Escriba su reseña',
+                  hintText: 'Escriba su comentario',
                   filled: true,
                   fillColor: Colors.white,
                   border: OutlineInputBorder(

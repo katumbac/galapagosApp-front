@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:exploregalapagos/shared/constants.dart';
 import 'package:exploregalapagos/widgets/data_font.dart';
-import 'package:exploregalapagos/Screens/Negocios/Resenas/resenas.dart';
 
-class NegocioCard extends StatelessWidget {
-  final int idNegocio;
-  final String nombreNegocio;
-  final String servicios;
-  final String horaInicio;
-  final String horaFin;
-  final String direccion;
+
+class GuiaCard extends StatelessWidget {
+  final int idGuia;
+  final String nombre;
+  final int edad;
+  final String telefono;
   final String linkImagen;
+  final String isla;
 
-  const NegocioCard({super.key, required this.idNegocio, required this.nombreNegocio, required this.servicios, required this.horaInicio, 
-    required this.horaFin, required this.direccion, required this.linkImagen});
+  const GuiaCard({super.key, required this.idGuia, required this.nombre, required this.edad, required this.telefono, 
+    required this.linkImagen, required this.isla,});
 
   @override
   Widget build(BuildContext context) {
-    String horario = "$horaInicio - $horaFin";
     return Card.outlined(
         margin: const EdgeInsets.fromLTRB(50.0, 10.0, 50.0, 10.0),
         shape: RoundedRectangleBorder(
@@ -32,8 +30,8 @@ class NegocioCard extends StatelessWidget {
           children: [
             const SizedBox(height: 20),
             Container(
-              width: 300,
-              height: 200,
+              width: 200,
+              height: 300,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
                 image: DecorationImage(
@@ -50,13 +48,14 @@ class NegocioCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  DataFont(dataTitulo: "Nombre: ", dataContenido: nombreNegocio),
+                  DataFont(dataTitulo: "Nombre: ", dataContenido: nombre),
                   const SizedBox(height: 9),
-                  DataFont(dataTitulo: "Opciones de servicio: ", dataContenido: servicios),
+                  DataFont(dataTitulo: "Edad: ", dataContenido: edad.toString()),
                   const SizedBox(height: 9),
-                  DataFont(dataTitulo: "Horario: ", dataContenido: horario),
+                  DataFont(dataTitulo: "Teléfono: ", dataContenido: telefono),
                   const SizedBox(height: 9),
-                  DataFont(dataTitulo: "Direccion: ", dataContenido: direccion),
+                  DataFont(dataTitulo: "Isla: ", dataContenido: isla),
+                  const SizedBox(height: 9),
                   const Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -66,23 +65,6 @@ class NegocioCard extends StatelessWidget {
                 ],
               )
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>  ResenasScreen(idNegocio: idNegocio, nombreNegocio: nombreNegocio, linkImagen: linkImagen)));
-                  },
-                  style: TextButton.styleFrom(
-                    foregroundColor: colorbuttonGreen,
-                  ),
-                  child: const Text('Reseñas...'),
-                )
-              ]
-            )
           ],
         )
     );

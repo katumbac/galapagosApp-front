@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:exploregalapagos/shared/constants.dart';
-import 'package:exploregalapagos/widgets/data_font.dart';
-import 'package:exploregalapagos/Screens/Negocios/Resenas/resenas.dart';
 
 class TextoCards extends StatelessWidget {
   final String nombre;
@@ -25,36 +23,36 @@ class TextoCards extends StatelessWidget {
         elevation: 10,
         child: Column(
           children: [
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   children: [
-                    SizedBox(width: 10),
-                    Icon(Icons.calendar_month),
+                    const SizedBox(width: 10),
+                    const Icon(Icons.calendar_month),
                     Text(fecha, style: const TextStyle(fontSize: 17))
                   ],
                 ),
                 Row(
                   children: [
-                    Icon(Icons.access_time),
+                    const Icon(Icons.access_time),
                     Text(hora, style: const TextStyle(fontSize: 17)),
-                    SizedBox(width: 15),
+                    const SizedBox(width: 15),
                   ],
                 )
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                SizedBox(width: 13),
+                const SizedBox(width: 13),
                 Text(nombre, style: const TextStyle(
                   fontWeight: FontWeight.bold, fontSize: 20))
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Container( 
               margin: const EdgeInsets.fromLTRB(15.0, 0.0, 20.0, 0.0),
               child: Column(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:exploregalapagos/shared/constants.dart';
 import 'package:exploregalapagos/shared/custom_app_bar.dart';
 import 'package:exploregalapagos/widgets/resenas_info_cards.dart';
 import 'package:exploregalapagos/Screens/Negocios/Resenas/registrar_resena.dart';
@@ -25,7 +24,7 @@ class _ResenasScreenState extends State<ResenasScreen> {
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
           Center(
             child: Container(
               width: 300,
@@ -40,15 +39,15 @@ class _ResenasScreenState extends State<ResenasScreen> {
               ),
             ),
           ),
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
           ResenasInfoCards(idNegocio: widget.idNegocio,),
-          SizedBox(height: 7),
+          const SizedBox(height: 7),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               IconButton(
-                icon: Icon(Icons.maps_ugc_outlined),
-                color: Color.fromARGB(255, 59, 66, 60),
+                icon: const Icon(Icons.maps_ugc_outlined),
+                color: const Color.fromARGB(255, 59, 66, 60),
                 iconSize: 55.0,
                 onPressed: () {
                   Navigator.push(
@@ -57,10 +56,10 @@ class _ResenasScreenState extends State<ResenasScreen> {
                     builder: (context) =>  RegistrarResena(idNegocio: widget.idNegocio)));
                 },
               ),
-              SizedBox(width: 25)
+              const SizedBox(width: 25)
             ],
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
         ],
       )
     );

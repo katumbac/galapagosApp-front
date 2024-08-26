@@ -27,7 +27,7 @@ class FloraCard extends StatelessWidget {
         elevation: 15,
         child: Column(
           children: [
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Container(
               width: 300,
               height: 200,
@@ -40,20 +40,20 @@ class FloraCard extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 20),
-            Container(
+            const SizedBox(height: 20),
+            SizedBox(
               width: 350,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   DataFont(dataTitulo: "Nombre común: ", dataContenido: nombreComun),
-                  SizedBox(height: 9),
+                  const SizedBox(height: 9),
                   DataFont(dataTitulo: "Nombre científico: ", dataContenido: nombreCientifico),
-                  SizedBox(height: 9),
+                  const SizedBox(height: 9),
                   DataFont(dataTitulo: "Distribución: ", dataContenido: distribucion),
-                  SizedBox(height: 9),
+                  const SizedBox(height: 9),
                   DataFont(dataTitulo: "Usos: ", dataContenido: usos),
-                  SizedBox(height: 9),
+                  const SizedBox(height: 9),
                   DataFont(dataTitulo: "Dato curioso: ", dataContenido: datoCurioso),      
                 ],
               )

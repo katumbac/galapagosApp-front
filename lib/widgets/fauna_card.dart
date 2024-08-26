@@ -27,7 +27,7 @@ class FaunaCard extends StatelessWidget {
         elevation: 15,
         child: Column(
           children: [
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Container(
               width: 300,
               height: 200,
@@ -40,20 +40,20 @@ class FaunaCard extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 20),
-            Container(
+            const SizedBox(height: 20),
+            SizedBox(
               width: 350,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   DataFont(dataTitulo: "Nombre común: ", dataContenido: nombreComun),
-                  SizedBox(height: 9),
+                  const SizedBox(height: 9),
                   DataFont(dataTitulo: "Nombre científico: ", dataContenido: nombreCientifico),
-                  SizedBox(height: 9),
+                  const SizedBox(height: 9),
                   DataFont(dataTitulo: "Hábitat: ", dataContenido: habitat),
-                  SizedBox(height: 9),
+                  const SizedBox(height: 9),
                   DataFont(dataTitulo: "Alimentación: ", dataContenido: alimentacion),
-                  SizedBox(height: 9),
+                  const SizedBox(height: 9),
                   DataFont(dataTitulo: "Dato curioso: ", dataContenido: datoCurioso),      
                 ],
               )

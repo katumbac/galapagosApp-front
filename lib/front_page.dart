@@ -1,4 +1,3 @@
-import 'package:exploregalapagos/main_screen.dart';
 import 'package:exploregalapagos/shared/constants.dart';
 import 'package:exploregalapagos/sign_in_up.dart';
 import 'package:flutter/material.dart';

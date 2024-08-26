@@ -1,6 +1,5 @@
 import 'package:exploregalapagos/front_page.dart';
 import 'package:flutter/material.dart';
-import 'package:exploregalapagos/Screens/Negocios/negocios.dart';
 
 void main() {
   runApp(const MyApp());
