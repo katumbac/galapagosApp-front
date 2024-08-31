@@ -39,6 +39,7 @@ class _ResenasInfoCardsState extends State<ResenasInfoCards> {
       if (response.statusCode == 200) {
         List<dynamic> data = response.data;
         listaResenas = data.map((json) => Resena.fromJson(json)).toList();
+        print(listaResenas!.length.toString());
         setState(() {}); 
       }
     }
