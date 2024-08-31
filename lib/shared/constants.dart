@@ -23,6 +23,13 @@ const List<Color> selectedGradient = defaultGradient;
 
 const Color gyellow = Color.fromARGB(255, 240, 204, 0);
 
+String urlBack = 'http://10.0.2.2:8000/api/v1';
+
+var nicknameUsuario;
+var idUsuario;
 //List<Color> defaultGradientGreen = [Color.fromARGB(165, 27, 56, 28),  Color.fromARGB(165, 27, 56, 28),];
 
-
+class Credenciales{
+  static String nicknameUsuario = '';
+  static int idUsuario = 0;
+}

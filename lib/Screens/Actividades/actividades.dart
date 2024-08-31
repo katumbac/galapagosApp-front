@@ -93,10 +93,10 @@ class _ActividadesDisponiblesScreenState
                   margin: EdgeInsets.fromLTRB(50.0, 5.0, 50.0, 5.0),
                   color: Colors.white,
                   elevation: 2,
-                  child: ItemSelection(
+                  child: Text('data') /*ItemSelection(
                     title: "Seleccionar Isla",
                     items: ['TODO', 'ISABELA', 'SANTA CRUZ'],
-                  ),
+                  ),*/
                 ),
                 const SizedBox(height: 30),
                 Expanded(

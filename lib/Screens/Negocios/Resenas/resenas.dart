@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:exploregalapagos/shared/custom_app_bar.dart';
-import 'package:exploregalapagos/widgets/resenas_info_cards.dart';
+//import 'package:exploregalapagos/widgets/resenas_info_cards.dart';
 import 'package:exploregalapagos/Screens/Negocios/Resenas/registrar_resena.dart';
+import 'package:dio/dio.dart';
+import 'package:exploregalapagos/models/resena.dart';
+import 'package:exploregalapagos/shared/constants.dart';
+import 'package:exploregalapagos/widgets/texto_cards.dart';
 
 class ResenasScreen extends StatefulWidget {
   final int idNegocio;
@@ -14,6 +18,37 @@ class ResenasScreen extends StatefulWidget {
 }
 
 class _ResenasScreenState extends State<ResenasScreen> {
+
+  List<Resena>? listaResenas;
+  late String idN;
+  String textoMostrar = 'Cargando.....';
+
+  @override
+  void initState() {
+    super.initState();
+    idN = widget.idNegocio.toString();
+    getResenas();
+  }
+
+  Future<void> getResenas() async {
+    try{
+      var response = await Dio().get('$urlBack/resena/id_negocio/$idN/'); 
+      if (response.statusCode == 200) {
+        List<dynamic> data = response.data;
+        listaResenas = data.map((json) => Resena.fromJson(json)).toList();
+        setState(() {}); 
+      }
+    }
+    catch (e) {
+      if (e is DioException) {
+        print('Error peticion');
+        setState(() {
+        textoMostrar = 'Sin resenas!!!';
+      });
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +75,21 @@ class _ResenasScreenState extends State<ResenasScreen> {
             ),
           ),
           const SizedBox(height: 30),
-          const ResenasInfoCards(),
+          if(listaResenas != null && listaResenas!.length >0)
+            Expanded(
+                child: ListView.builder(
+                  itemCount: listaResenas!.length,
+                  itemBuilder: (context, index) => TextoCards(
+                    nombre: listaResenas![index].usuario.nickname,
+                    texto: listaResenas![index].descripcion,
+                    fecha: "${listaResenas![index].fecha.year}-${listaResenas![index].fecha.month}-${listaResenas![index].fecha.day}",
+                    hora: "${listaResenas![index].hora.split(":")[0]}:${listaResenas![index].hora.split(":")[1]}"
+                  )
+                )
+              )
+          else
+            Text(textoMostrar),
+
           const SizedBox(height: 7),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -49,12 +98,20 @@ class _ResenasScreenState extends State<ResenasScreen> {
                 icon: const Icon(Icons.maps_ugc_outlined),
                 color: const Color.fromARGB(255, 59, 66, 60),
                 iconSize: 55.0,
-                onPressed: () {
-                  Navigator.push(
+                onPressed: () async {
+                  final resultado = await Navigator.push(
                     context,
                     MaterialPageRoute(
                     builder: (context) =>  RegistrarResena(idNegocio: widget.idNegocio)));
-                },
+                  if (resultado != null) {
+                    print("Resultado recibido: $resultado");
+                    setState(() {
+                      getResenas();
+                    }); 
+                  } else {
+                    print("Sin resultado, regresa pantalla");
+                  }
+                  },
               ),
               const SizedBox(width: 25)
             ],

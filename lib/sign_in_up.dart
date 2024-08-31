@@ -1,6 +1,8 @@
 import 'package:exploregalapagos/main_screen.dart';
 import 'package:exploregalapagos/shared/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:dio/dio.dart';
+import 'package:exploregalapagos/models/usuario.dart';
 
 class SignInUp extends StatefulWidget {
   const SignInUp({super.key});
@@ -11,6 +13,68 @@ class SignInUp extends StatefulWidget {
 
 class _SignInUpState extends State<SignInUp> {
   bool isLogin = true;
+
+  final TextEditingController _nickname = TextEditingController();
+  final TextEditingController _password = TextEditingController();
+
+  Usuario? usuario;
+
+  int number = 0;
+
+  List<Usuario>? listaUsuarios;
+
+  @override
+  void dispose() {
+    _nickname.dispose();
+    _password.dispose();
+    super.dispose();
+  }
+
+  Future<void> postUsuario() async {
+      try{
+        if(_nickname.text == '' || _password.text == ''){
+          throw Exception();
+        }
+        var response = await Dio().post('$urlBack/usuario/crear_usuario//',
+          data: {
+            'nickname': _nickname.text,
+            'password': _password.text,
+          }
+        ); 
+        if (response.statusCode == 201) {
+          setState(() {number = 1;});
+        }
+      }
+      catch (e) {
+        if (e is DioException) {
+          print('Error peticion');
+        }
+      }
+    }
+
+  Future<void> getUsuario() async {
+    try{
+      if(_nickname.text == '' || _password.text == ''){
+          throw Exception();
+      }
+      var response = await Dio().get('$urlBack/usuario/nickname/${_nickname.text}/'); 
+      if (response.statusCode == 200) {
+        print("encontrado");
+        List<dynamic> data = response.data;
+        listaUsuarios = data.map((json) => Usuario.fromJson(json)).toList();
+        usuario = listaUsuarios![0];
+        Credenciales.nicknameUsuario = usuario!.nickname;
+        Credenciales.idUsuario = usuario!.id;
+        setState(() {
+        }); 
+      }
+    }
+    catch (e) {
+      if (e is DioException) {
+        print('Error peticion');
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -127,6 +191,7 @@ class _SignInUpState extends State<SignInUp> {
                       ),
                       const SizedBox(height: 20),
                       TextField(
+                        controller: _nickname,
                         decoration: InputDecoration(
                           hintText: 'Usuario',
                           filled: true,
@@ -138,6 +203,7 @@ class _SignInUpState extends State<SignInUp> {
                       ),
                       const SizedBox(height: 10),
                       TextField(
+                        controller: _password,
                         decoration: InputDecoration(
                           hintText: 'Contraseña',
                           filled: true,
@@ -156,8 +222,27 @@ class _SignInUpState extends State<SignInUp> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
-                        onPressed: () {
-                          setState(() {
+                        onPressed: () async {
+                          if(isLogin){
+                            //setState(() {
+                              await getUsuario();
+                            //}); 
+                            //print(usuario!.nickname);
+                            if(usuario != null){
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const MainScreen()));
+                            }
+                          }
+                          else{
+                            await postUsuario();
+                            if(number == 1){
+                              setState(() {isLogin = true;}); 
+                            }
+                          }},
+                          /*onPressed: () {setState(() {
                             if (isLogin) {
                               Navigator.push(
                                   context,
@@ -168,7 +253,7 @@ class _SignInUpState extends State<SignInUp> {
                               isLogin = true;
                             }
                           });
-                        },
+                        },*/
                         child: Padding(
                           padding: const EdgeInsets.symmetric(vertical: 15),
                           child: Text(

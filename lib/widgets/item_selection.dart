@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 class ItemSelection extends StatefulWidget {
   final String title;
   final List<String> items;
-  //final ValueChanged<String> onSelected;
+  final ValueChanged<String> onSelected;
 
   const ItemSelection(
-      {super.key, required this.title, required this.items });//required this.onSelected});
+      {super.key, required this.title, required this.items, required this.onSelected});
 
   @override
   State<ItemSelection> createState() => _ItemSelectionState();
@@ -40,7 +40,7 @@ class _ItemSelectionState extends State<ItemSelection> {
               setState(() {
                 title = newItem;
               });
-              //widget.onSelected(newItem);
+              widget.onSelected(newItem);
             }));
   }
 }
