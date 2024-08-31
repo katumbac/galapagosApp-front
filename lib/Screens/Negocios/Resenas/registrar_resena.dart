@@ -33,7 +33,7 @@ class _RegistrarResenaState extends State<RegistrarResena> {
         var response = await Dio().post('$urlBack/resena/crear_resena//',
           data: {
             'negocio': widget.idNegocio,
-            'usuario': 1,
+            'usuario': Credenciales.idUsuario,
             'descripcion' : _resena.text,
           }
         ); 

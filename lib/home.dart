@@ -36,11 +36,10 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: size.height * 0.01),
-            const Align(
+             Align(
               alignment: Alignment.center,
-              child: Text(
-                'Bienvenido/a',
-                style: TextStyle(
+              child: Text('Bienvenido/a ${Credenciales.nicknameUsuario}',
+                style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                   color: colorbuttonGreen,

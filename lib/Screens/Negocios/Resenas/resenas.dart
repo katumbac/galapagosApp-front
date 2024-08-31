@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:exploregalapagos/shared/custom_app_bar.dart';
-import 'package:exploregalapagos/widgets/resenas_info_cards.dart';
+//import 'package:exploregalapagos/widgets/resenas_info_cards.dart';
 import 'package:exploregalapagos/Screens/Negocios/Resenas/registrar_resena.dart';
 import 'package:dio/dio.dart';
 import 'package:exploregalapagos/models/resena.dart';
