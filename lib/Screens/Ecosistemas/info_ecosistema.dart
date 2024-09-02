@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:exploregalapagos/shared/constants.dart';
 
 class InfoEcosistema extends StatelessWidget {
-  final String idEco;
+  final int idEco;
   final String nombre;
   final String descripcion;
   final String imagen;

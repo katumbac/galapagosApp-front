@@ -1,19 +1,96 @@
 import 'package:flutter/material.dart';
 import 'package:exploregalapagos/shared/constants.dart';
+import 'package:dio/dio.dart';
+import 'package:exploregalapagos/Screens/Islas/info_isla.dart';
+import 'package:exploregalapagos/models/isla.dart';
 
-class CardInfoIsla extends StatelessWidget {
-  final Size size;
-  final Map<String, dynamic> isla;
-  final int displayStars;
-  final VoidCallback onTap;
-
+class CardInfoIsla extends StatefulWidget {
   const CardInfoIsla({
+    super.key,
+  });
+
+  @override
+  State<CardInfoIsla> createState() => _CardInfoIslaState();
+}
+
+class _CardInfoIslaState extends State<CardInfoIsla> {
+  List<Isla>? islas;
+
+  @override
+  void initState() {
+    super.initState();
+    getIslas();
+  }
+
+  Future<void> getIslas() async {
+    try {
+      var response = await Dio().get('$urlBack/isla/registradas/');
+      if (response.statusCode == 200) {
+        List<dynamic> data = response.data;
+        islas = data.map((json) => Isla.fromJson(json)).toList();
+        setState(() {});
+      }
+    } catch (e) {
+      if (e is DioException) {
+        print('Error peticion');
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
+    if (islas == null || islas!.isEmpty) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+
+    return Column(
+      children: [
+        Expanded(
+          child: ListView.builder(
+            itemCount: islas!.length,
+            itemBuilder: (context, index) {
+              Isla isla = islas![index];
+
+              final maxCalificacion = [
+                isla.calificacionUno,
+                isla.calificacionDos,
+                isla.calificacionTres,
+              ].reduce((a, b) => a > b ? a : b);
+
+              print('cali: $maxCalificacion');
+
+              final displayStars = [
+                if (isla.calificacionUno == maxCalificacion) 1,
+                if (isla.calificacionDos == maxCalificacion) 2,
+                if (isla.calificacionTres == maxCalificacion) 3
+              ];
+
+              print('displayStars: $displayStars');
+              return CardIsla(
+                  size: size, isla: isla, displayStars: displayStars);
+            },
+          ),
+        )
+      ],
+    );
+  }
+}
+
+class CardIsla extends StatelessWidget {
+  const CardIsla({
     super.key,
     required this.size,
     required this.isla,
     required this.displayStars,
-    required this.onTap,
   });
+
+  final Size size;
+  final Isla isla;
+  final List<int> displayStars;
 
   @override
   Widget build(BuildContext context) {
@@ -32,14 +109,14 @@ class CardInfoIsla extends StatelessWidget {
             leading: ClipRRect(
               borderRadius: BorderRadius.circular(8.0),
               child: Image.network(
-                isla['imagen'],
+                isla.imagen,
                 width: size.width * 0.25,
                 height: size.height * 0.15,
                 fit: BoxFit.cover,
               ),
             ),
             title: Text(
-              isla['nombre'],
+              isla.nombre,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: size.width * 0.05,
@@ -48,12 +125,18 @@ class CardInfoIsla extends StatelessWidget {
             ),
             subtitle: Row(
               children: [
-                ...List.generate(
-                  3,
-                  (starIndex) => Icon(
-                    Icons.star,
-                    color: starIndex < displayStars ? gyellow : Colors.grey,
-                    size: size.width * 0.05,
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: List.generate(
+                      3,
+                      (starIndex) => Icon(
+                        Icons.star,
+                        color:
+                            starIndex < displayStars[0] ? gyellow : Colors.grey,
+                        size: size.width * 0.05,
+                      ),
+                    ),
                   ),
                 ),
                 const Spacer(),
@@ -66,7 +149,22 @@ class CardInfoIsla extends StatelessWidget {
                 ),
               ],
             ),
-            onTap: onTap,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => InfoIsla(
+                    idIsla: isla.id,
+                    nombre: isla.nombre,
+                    calificacionUno: isla.calificacionUno,
+                    calificacionDos: isla.calificacionDos,
+                    calificacionTres: isla.calificacionTres,
+                    descripcion: isla.descripcion,
+                    imagen: isla.imagen,
+                  ),
+                ),
+              );
+            },
           ),
         ),
       ),

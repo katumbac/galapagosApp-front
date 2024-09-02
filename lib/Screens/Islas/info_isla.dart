@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:exploregalapagos/shared/constants.dart';
+import 'package:dio/dio.dart';
 
 class InfoIsla extends StatefulWidget {
-  final String idIsla;
+  final int idIsla;
   final String nombre;
   final int calificacionUno;
   final int calificacionDos;
@@ -36,6 +37,71 @@ class InfoIsla extends StatefulWidget {
 
 class _InfoIslaState extends State<InfoIsla> {
   int estrellas = 0;
+  int idusuario = Credenciales.idUsuario;
+
+  @override
+  void initState() {
+    super.initState();
+    getCalificacionUsuario();
+  }
+
+  Future<void> getCalificacionUsuario() async {
+    try {
+      var response = await Dio().get(
+          '$urlBack/calificacion/usuario/$idusuario/isla/${widget.idIsla}/');
+      print(idusuario);
+      if (response.statusCode == 200) {
+        List<dynamic> data = response.data;
+
+        if (data.isNotEmpty) {
+          final calificacion = data[0];
+          print(calificacion);
+          
+          final puntuacion = calificacion['puntuacion'];
+
+          setState(() {
+            estrellas = puntuacion;
+          });
+        }
+      } else {
+        print('Error al obtener calificación: ${response.statusCode}');
+      }
+    } catch (e) {
+      if (e is DioException) {
+        print('Error peticion ${e.response?.data}');
+      }
+    }
+  }
+
+  Future<void> registrarCalificacion(int puntuacion) async {
+    try {
+      final response = await Dio().post(
+        '$urlBack/calificacion/registrar_calificacion/',
+        data: {
+          'voto': true,
+          'puntuacion': puntuacion,
+          'isla': widget.idIsla,
+          'usuario': idusuario,
+        },
+      );
+
+      if (response.statusCode == 201) {
+        print('Calificación registrada correctamente');
+      } else {
+        print('Error al registrar calificación: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error en la petición: $e');
+    }
+  }
+
+  Future<void> _handleCalificacion(int puntuacion) async {
+    setState(() {
+      estrellas = puntuacion;
+    });
+    await registrarCalificacion(puntuacion);
+  }
+  
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -147,9 +213,8 @@ class _InfoIslaState extends State<InfoIsla> {
                             3,
                             (index) => GestureDetector(
                               onTap: () {
-                                setState(() {
-                                  estrellas = index + 1;
-                                });
+                                estrellas = index + 1;
+                                _handleCalificacion(estrellas);
                               },
                               child: Icon(
                                 Icons.star,
