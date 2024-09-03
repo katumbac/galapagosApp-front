@@ -1,12 +1,9 @@
 import 'package:exploregalapagos/models/negocio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:exploregalapagos/shared/custom_app_bar.dart';
 import 'package:exploregalapagos/shared/constants.dart';
 import 'package:exploregalapagos/widgets/item_selection.dart';
 import 'package:exploregalapagos/widgets/negocio_card.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter/src/widgets/text.dart';
 import 'package:dio/dio.dart';
 import 'package:exploregalapagos/models/tipo_negocio.dart';
 import 'package:exploregalapagos/models/isla.dart';
@@ -97,7 +94,7 @@ class _NegociosScreenState extends State<NegociosScreen> {
 
   Future<void> getNegocios() async {
     try{
-      var response = await Dio().get('$urlBack/negocio/buscar_negocios/');
+      var response = await Dio().get('$urlBack/negocio/');
       if (response.statusCode == 200) {
         List<dynamic> data = response.data;
         negocios = data.map((json) => Negocio.fromJson(json)).toList();
@@ -153,7 +150,7 @@ class _NegociosScreenState extends State<NegociosScreen> {
             children: [
               const SizedBox(height: 15),
               Card.outlined(
-                margin: EdgeInsets.fromLTRB(50.0, 5.0, 50.0, 5.0),
+                margin: const EdgeInsets.fromLTRB(50.0, 5.0, 50.0, 5.0),
                 color: Colors.white,
                 elevation: 2,
                 child: ItemSelection(
@@ -165,7 +162,7 @@ class _NegociosScreenState extends State<NegociosScreen> {
               ),
               const SizedBox(height: 15),
               Card.outlined(
-                margin: EdgeInsets.fromLTRB(50.0, 5.0, 50.0, 5.0),
+                margin: const EdgeInsets.fromLTRB(50.0, 5.0, 50.0, 5.0),
                 color: Colors.white,
                 elevation: 2,
                 child: ItemSelection(

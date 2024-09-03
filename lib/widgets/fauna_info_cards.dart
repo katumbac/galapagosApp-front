@@ -46,7 +46,7 @@ class _FaunaInfoCardsState extends State<FaunaInfoCards> {
 
   @override
   Widget build(BuildContext context) {
-    if(listaFauna != null && listaFauna!.length >0){
+    if(listaFauna != null && listaFauna!.isNotEmpty){
     return Expanded(
         child: ListView.builder(
             itemCount: listaFauna!.length,

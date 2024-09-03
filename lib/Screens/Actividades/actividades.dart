@@ -1,8 +1,12 @@
+import 'package:dio/dio.dart';
+import 'package:exploregalapagos/models/actividad.dart';
+import 'package:exploregalapagos/models/isla.dart';
+import 'package:exploregalapagos/shared/constants.dart';
+import 'package:exploregalapagos/widgets/item_selection.dart';
 import 'package:flutter/material.dart';
 import 'package:exploregalapagos/shared/custom_app_bar.dart';
 
 import '../../widgets/actividad_card.dart';
-import '../../widgets/item_selection.dart';
 
 class ActividadesDisponiblesScreen extends StatefulWidget {
   const ActividadesDisponiblesScreen(
@@ -17,10 +21,9 @@ class ActividadesDisponiblesScreen extends StatefulWidget {
       _ActividadesDisponiblesScreenState();
 }
 
-class _ActividadesDisponiblesScreenState
-    extends State<ActividadesDisponiblesScreen> {
-  List<Map> actividades = [
-    {
+class _ActividadesDisponiblesScreenState extends State<ActividadesDisponiblesScreen> {
+
+  /*{
       'id': 1,
       'nombreActividad': 'Latin Trails',
       'edad': '20',
@@ -30,52 +33,81 @@ class _ActividadesDisponiblesScreenState
       'precio': '\$10',
       'isla': 'Isabella',
       'imagen': 'https://latintrails.com/wp-content/uploads/2018/08/galapagos-adventure-latin-trails1.jpg'
-    },
-    {
-      'id': 2,
-      'nombreActividad': 'Snorkel',
-      'edad': '20',
-      'horaInicio': '6:30',
-      'horaFin': '21:00',
-      'direccion': 'Direccion 2',
-      'precio': '\$10',
-      'isla': 'Isabella',
-      'imagen': 'https://img.goraymi.com/2021/05/19/b325d7e1278c8833b49d6a1c086f1e18_xl.jpg'
-    },
-    {
-      'id': 3,
-      'nombreActividad': 'Senderismo',
-      'edad': '20',
-      'horaInicio': '6:30',
-      'horaFin': '21:00',
-      'direccion': 'Direccion 3',
-      'precio': '\$10',
-      'isla': 'Isabella',
-      'imagen': 'https://naturegalapagos.com/es/wp-content/uploads/sites/3/2018/12/que-hacer-en-isla-isabela-galapagos-feat.jpg'
-    },
-    {
-      'id': 4,
-      'nombreActividad': 'Buceo',
-      'edad': '20',
-      'horaInicio': '6:30',
-      'horaFin': '21:00',
-      'direccion': 'Direccion 5',
-      'precio': '\$10',
-      'isla': 'Isabella',
-      'imagen': 'https://s3-us-west-1.amazonaws.com/tipsparatuviaje/wp-content/uploads/2017/04/1.-Bucea-y-surfea-en-Isla-Santa-Cruz.jpg'
-    },
-    {
-      'id': 5,
-      'nombreActividad': 'Ciclismo',
-      'edad': '20',
-      'horaInicio': '6:30',
-      'horaFin': '21:00',
-      'direccion': 'Direccion 5',
-      'precio': '\$10',
-      'isla': 'Isabella',
-      'imagen': 'https://livingecuadortravel.com/wp-content/uploads/2019/12/Bicicleta-en-Isabela-1024x683.jpg'
-    },
-  ];
+    }*/
+
+  List<Actividad>? actividades;
+  List<Isla>? islas;
+
+  List<String> nombreIslas = ['TODO'];
+
+  String filtroIsla = 'TODO';
+
+  List<Actividad>? ActividadesFiltradas = [];
+
+  @override
+  void initState() {
+    super.initState();
+    getIslas();
+    getActividades();
+  }
+
+
+  Future<void> getIslas() async {
+    try {
+      var response = await Dio().get('$urlBack/isla/registradas/');
+      if (response.statusCode == 200) {
+        List<dynamic> data = response.data;
+        islas = data.map((json) => Isla.fromJson(json)).toList();
+        setState(() {});
+        nombresIsla();
+      }
+    } catch (e) {
+      if (e is DioException) {
+        print('Error peticion');
+      }
+    }
+  }
+
+  void nombresIsla() {
+    if (islas != null) {
+      nombreIslas.addAll(islas!.map((isla) => isla.nombre).toList());
+      setState(() {});
+    }
+  }
+
+  Future<void> getActividades() async {
+    try {
+      var response = await Dio().get('$urlBack/actividad/');
+      print("antes del if");
+      if (response.statusCode == 200) {
+        List<dynamic> data = response.data;
+        print("obteniendo respuesta");
+
+        actividades = data.map((json) => Actividad.fromJson(json)).toList();
+        print("conversion de datos a actividades");
+
+        ActividadesFiltradas = actividades;
+        setState(() {});
+        print("Actividades: $actividades");
+      }
+    } catch (e) {
+        print(e.toString());
+    }
+  }
+
+  void actualizarFiltro(String nuevaIsla) {
+    setState(() {
+      filtroIsla = nuevaIsla;
+      if (filtroIsla == 'TODO') {
+        ActividadesFiltradas = actividades;
+      } else {
+        ActividadesFiltradas = actividades!
+        .where((actividad) => actividad.isla.nombre.contains(filtroIsla))
+        .toList();
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -89,30 +121,31 @@ class _ActividadesDisponiblesScreenState
             body: Column(
               children: [
                 const SizedBox(height: 15),
-                const Card.outlined(
-                  margin: EdgeInsets.fromLTRB(50.0, 5.0, 50.0, 5.0),
-                  color: Colors.white,
-                  elevation: 2,
-                  child: Text('data') /*ItemSelection(
-                    title: "Seleccionar Isla",
-                    items: ['TODO', 'ISABELA', 'SANTA CRUZ'],
-                  ),*/
-                ),
+                Card.outlined(
+                    margin: const EdgeInsets.fromLTRB(50.0, 5.0, 50.0, 5.0),
+                    color: Colors.white,
+                    elevation: 2,
+                    child: ItemSelection(
+                      title: "Seleccionar Isla",
+                      items: nombreIslas,
+                      onSelected: (nuevaIsla) =>
+                        actualizarFiltro(nuevaIsla)
+                  ),
+              ),
                 const SizedBox(height: 30),
                 Expanded(
                     child: ListView.builder(
-                        itemCount: actividades.length,
+                        itemCount: ActividadesFiltradas!.length,
                         itemBuilder: (context, index) => ActividadCard(
-                              idActividad: actividades[index]['id'],
-                              nombreActividad: actividades[index]
-                                  ['nombreActividad']!,
-                              horaInicio: actividades[index]['horaInicio']!,
-                              horaFin: actividades[index]['horaFin']!,
-                              direccion: actividades[index]['direccion']!,
-                              isla: actividades[index]['isla']!,
-                              precio: actividades[index]['precio']!,
-                              edad: actividades[index]['edad']!,
-                              imagen: actividades[index]['imagen']!,
+                          idActividad: ActividadesFiltradas![index].id,
+                          nombreActividad: ActividadesFiltradas![index].nombre,
+                          horaInicio: ActividadesFiltradas![index].horaInicio.toString(),
+                          horaFin: ActividadesFiltradas![index].horaFin.toString(),
+                          direccion: ActividadesFiltradas![index].direccion,
+                          isla: ActividadesFiltradas![index].isla.nombre,
+                          precio: ActividadesFiltradas![index].precio.toString(),
+                          edad: ActividadesFiltradas![index].edad.toString(),
+                          imagen: ActividadesFiltradas![index].imagen,
                             )))
               ],
             )));

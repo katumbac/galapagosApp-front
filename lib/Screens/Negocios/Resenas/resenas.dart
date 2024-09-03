@@ -75,7 +75,7 @@ class _ResenasScreenState extends State<ResenasScreen> {
             ),
           ),
           const SizedBox(height: 30),
-          if(listaResenas != null && listaResenas!.length >0)
+          if(listaResenas != null && listaResenas!.isNotEmpty)
             Expanded(
                 child: ListView.builder(
                   itemCount: listaResenas!.length,

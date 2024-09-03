@@ -45,7 +45,7 @@ class _FloraInfoCardsState extends State<FloraInfoCards> {
 
   @override
   Widget build(BuildContext context) {
-    if(listaFlora != null && listaFlora!.length >0){
+    if(listaFlora != null && listaFlora!.isNotEmpty){
     return Expanded(
         child: ListView.builder(
             itemCount: listaFlora!.length,

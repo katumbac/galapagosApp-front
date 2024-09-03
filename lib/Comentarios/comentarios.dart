@@ -1,8 +1,10 @@
 import 'package:exploregalapagos/Comentarios/registrar_comentarios.dart';
+import 'package:exploregalapagos/models/comentario.dart';
 import 'package:exploregalapagos/shared/constants.dart';
 import 'package:exploregalapagos/shared/custom_app_bar.dart';
 import 'package:exploregalapagos/widgets/texto_cards.dart';
 import 'package:flutter/material.dart';
+import 'package:dio/dio.dart';
 
 class ComentariosScreen extends StatefulWidget {
   final int usuario;
@@ -16,13 +18,39 @@ class ComentariosScreen extends StatefulWidget {
 
 class _ComentariosScreenState extends State<ComentariosScreen> {
 
-  List<Map<String,String>> comentarios = [
-    {'nombre': 'rochardd', 'texto': 'comidas ricas', 'fecha': '2024-01-01', 'hora': '17:00'},
-    {'nombre': 'pepito', 'texto': 'me gustan los cocteles', 'fecha': '2024-01-01', 'hora': '8:00'},
-    {'nombre': 'lacobra', 'texto': 'BOEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE', 'fecha': '2024-01-01', 'hora': '21:00'},
-    {'nombre': 'davo', 'texto': 'mala atencion, no volvere nunca mas en mi vida :)', 'fecha': '2024-01-01', 'hora': '5:00'},
-    {'nombre': 'usuario1', 'texto': 'no se que poner', 'fecha': '2024-01-01', 'hora': '14:00'},
-  ];
+  List<Comentario>? listaComentarios;
+  late String idUsuario;
+  String textoMostrar = 'Cargando.....';
+
+  @override
+  void initState() {
+    super.initState();
+    idUsuario = widget.usuario.toString();
+    getComentarios();
+  }
+
+  Future<void> getComentarios() async {
+    try{
+      var response = await Dio().get('$urlBack/comentario/obtener_comentarios/'); 
+      if (response.statusCode == 200) {
+        List<dynamic> data = response.data;
+        listaComentarios = data.map((json) => Comentario.fromJson(json)).toList();
+        setState(() {}); 
+      }
+    }
+    catch (e) {
+      if (e is DioException) {
+        print('Error peticion');
+        setState(() {
+        textoMostrar = 'No existen comentarios para mostrar';
+      });
+      }
+    }
+  }
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,18 +66,22 @@ class _ComentariosScreenState extends State<ComentariosScreen> {
               ),
             ),
             const SizedBox(height: 20),
-            const SizedBox(height: 30),
+            if(listaComentarios != null && listaComentarios!.isNotEmpty)
               Expanded(
                 child: ListView.builder(
-                  itemCount: comentarios.length,
+                  itemCount: listaComentarios!.length,
                   itemBuilder: (context, index) => TextoCards(
-                    nombre: comentarios[index]['nombre']!,
-                    texto: comentarios[index]['texto']!,
-                    fecha: comentarios[index]['fecha']!,
-                    hora: comentarios[index]['hora']!,
+                    nombre: listaComentarios![index].usuario.nickname,
+                    texto: listaComentarios![index].comentario,
+                    fecha: "${listaComentarios![index].fecha.year}-${listaComentarios![index].fecha.month}-${listaComentarios![index].fecha.day}",
+                    hora: "${listaComentarios![index].hora.split(":")[0]}:${listaComentarios![index].hora.split(":")[1]}"
                   )
                 )
-              ),   
+              )   
+            else
+            Text(textoMostrar),
+
+          const SizedBox(height: 7),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -57,16 +89,25 @@ class _ComentariosScreenState extends State<ComentariosScreen> {
                 icon: const Icon(Icons.maps_ugc_outlined),
                 color: const Color.fromARGB(255, 59, 66, 60),
                 iconSize: 55.0,
-                onPressed: () {
-                  Navigator.push(
+                onPressed: () async {
+                  final resultado = await Navigator.push(
                     context,
                     MaterialPageRoute(
                     builder: (context) =>  RegistrarComentario(usuario: widget.usuario)));
-                },
+                  if (resultado != null) {
+                    print("Resultado recibido: $resultado");
+                    setState(() {
+                      getComentarios();
+                    }); 
+                  } else {
+                    print("Sin resultado, regresa pantalla");
+                  }
+                  },
               ),
               const SizedBox(width: 25)
             ],
           ),
+          const SizedBox(height: 10),
         ],
         
       ),
