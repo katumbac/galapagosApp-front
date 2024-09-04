@@ -57,32 +57,26 @@ class NegocioCard extends StatelessWidget {
                   DataFont(dataTitulo: "Horario: ", dataContenido: horario),
                   const SizedBox(height: 9),
                   DataFont(dataTitulo: "Direccion: ", dataContenido: direccion),
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      SizedBox(height: 1)
-                    ],
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>  ResenasScreen(idNegocio: idNegocio, nombreNegocio: nombreNegocio, linkImagen: linkImagen)));
+                        },
+                        style: TextButton.styleFrom(
+                          foregroundColor: colorbuttonGreen,
+                        ),
+                        child: const Text('Reseñas...'),
+                      )
+                    ]
                   )   
                 ],
               )
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>  ResenasScreen(idNegocio: idNegocio, nombreNegocio: nombreNegocio, linkImagen: linkImagen)));
-                  },
-                  style: TextButton.styleFrom(
-                    foregroundColor: colorbuttonGreen,
-                  ),
-                  child: const Text('Reseñas...'),
-                )
-              ]
-            )
           ],
         )
     );

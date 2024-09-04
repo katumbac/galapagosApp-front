@@ -16,7 +16,7 @@ class FloraCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card.outlined(
-        margin: const EdgeInsets.fromLTRB(50.0, 10.0, 50.0, 10.0),
+        margin: const EdgeInsets.fromLTRB(70.0, 10.0, 70.0, 10.0),
         shape: RoundedRectangleBorder(
           side: const BorderSide(
             color: colorbuttonGreen,
@@ -41,8 +41,9 @@ class FloraCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            SizedBox(
-              width: 350,
+            Container(
+              //width: 350,
+              margin: const EdgeInsets.fromLTRB(47.0, 0.0, 47.0, 0.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -54,16 +55,16 @@ class FloraCard extends StatelessWidget {
                   const SizedBox(height: 9),
                   DataFont(dataTitulo: "Usos: ", dataContenido: usos),
                   const SizedBox(height: 9),
-                  DataFont(dataTitulo: "Dato curioso: ", dataContenido: datoCurioso),      
+                  DataFont(dataTitulo: "Dato curioso: ", dataContenido: datoCurioso),
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      SizedBox(height: 20)
+                    ],
+                  )      
                 ],
               )
             ),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                SizedBox(height: 20)
-              ],
-            )
           ],
         )
     );
